@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket 채팅</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- CSS 파일 링크 -->
+</head>
+<body>
+<div class="container">
+    <h2>WebSocket을 활용한 채팅방에<br> 오신 것을 환영합니다.</h2>
+
+    <form action="/login" method="post">
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="로그인"><br><br>
+    </form>
+
+    <button onclick="SignUp()">회원가입</button>
+</div>
+
+<!-- JavaScript 파일 링크 등 필요한 리소스를 추가하세요 -->
+
+<script>
+    function googleLogin() {
+        // 구글 로그인 처리를 위한 JavaScript 코드를 작성하세요
+    }
+
+    function SignUp() {
+        window.location.href = "/user/signup";
+    }
+</script>
+</body>
+</html>
