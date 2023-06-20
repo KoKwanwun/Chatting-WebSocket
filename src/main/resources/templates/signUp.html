@@ -8,11 +8,11 @@
 <div class="container">
   <h2>회원가입</h2>
 
-  <form action="/register" method="post">
+  <form class="" onsubmit="return false;">
     <div class="label-input">
       <label for="email">이메일</label>
       <input style="margin-right: 20px" type="email" id="email" name="email" required>
-      <button style="width: 100px">중복확인</button>
+      <button id="check_email" style="width: 100px" onclick="Check_email(); return false;">중복확인</button>
     </div><br>
 
     <div class="label-input">
@@ -25,10 +25,63 @@
       <input type="name" id="name" name="name" required>
     </div><br>
 
-    <input type="submit" value="회원가입"><br><br>
+    <input id="signup" style="background-color: #4285F4;" type="submit" value="회원가입" onclick="Signup(); return false;" disabled=true><br><br>
   </form>
+
+  <button style="background-color: #CC6600;" onclick="history.back()">뒤로가기</button>
 </div>
 
 <!-- CSS 파일 링크 등 필요한 리소스를 추가하세요 -->
+
+<script src="/js/axios.js"></script>
+<script>
+  const config = {"Content-Type" : `application/json` };
+
+  async function Check_email() {
+    let email = document.getElementById('email').value;
+
+    if (email == "") {
+      alert("이메일을 입력해주세요.")
+    } else {
+      try {
+        const response = await axios.post('/api/v1/check/email', {"email": email}, config);
+        alert("사용 가능한 이메일입니다.")
+        document.getElementById("signup").disabled = false
+        document.getElementById("email").disabled = true
+      } catch (e) {
+        alert("사용 불가능한 이메일입니다. 다시 한번 확인해주세요.")
+        document.getElementById("signup").disabled = true
+      }
+    }
+  }
+
+  //회원가입 요청
+  async function Signup() {
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let name = document.getElementById("name").value;
+
+    let data = {
+      'email' : email,
+      'password' : password,
+      'name' : name
+    }
+
+    if (email == "") {
+      alert("이메일을 입력해주세요.")
+    } else if (password == "") {
+      alert("비밀번호를 입력해주세요.")
+    } else if (name == "") {
+      alert("이름을 입력해주세요.")
+    } else {
+      try {
+        await axios.post('/api/v1/signup', data, config);
+        alert('회원가입에 성공했습니다.')
+        window.location.href = '/';
+      } catch (e) {
+      }
+    }
+  }
+</script>
 </body>
 </html>

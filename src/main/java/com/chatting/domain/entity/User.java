@@ -1,5 +1,6 @@
 package com.chatting.domain.entity;
 
+import com.chatting.domain.dto.UserDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,4 +24,13 @@ public class User {
     private String email;
     private String password;
     private String name;
+
+    public UserDto toDto() {
+        return UserDto.builder()
+                .id(id)
+                .email(email)
+                .password(password)
+                .name(name)
+                .build();
+    }
 }
