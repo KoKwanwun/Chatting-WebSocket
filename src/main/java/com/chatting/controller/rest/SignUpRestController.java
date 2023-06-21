@@ -1,8 +1,8 @@
 package com.chatting.controller.rest;
 
 import com.chatting.domain.Response;
-import com.chatting.domain.dto.UserDto;
-import com.chatting.domain.dto.user.UserEmailRequest;
+import com.chatting.domain.dto.user.UserDto;
+import com.chatting.domain.dto.user.UserLoginIdRequest;
 import com.chatting.domain.dto.user.UserSignUpRequest;
 import com.chatting.service.SignUpService;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +26,11 @@ public class SignUpRestController {
     }
 
     //== 회원가입 이메일 확인 ==//
-    @PostMapping("/check/email")
-    public Boolean checkEmail(@RequestBody UserEmailRequest userEmailRequest) {
+    @PostMapping("/check/loginId")
+    public Boolean checkLoginId(@RequestBody UserLoginIdRequest userLoginIdRequest) {
 
-        String email = userEmailRequest.getEmail();
+        String loginId = userLoginIdRequest.getLoginId();
 
-        return signUpService.checkEmail(email);
+        return signUpService.checkLoginId(loginId);
     }
 }

@@ -31,7 +31,7 @@ label {
     margin-bottom: 10px;
 }
 
-input[type="email"],
+input[id="loginId"],
 input[type="password"],
 input[type="name"],
 input[type="submit"],
@@ -56,7 +56,7 @@ button:hover {
     background-color: #45bb99;
 }
 
-input[type="email"],
+input[id="loginId"],
 input[type="name"],
 input[type="password"] {
     border: 1px solid #ccc;

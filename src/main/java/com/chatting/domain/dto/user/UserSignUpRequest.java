@@ -9,13 +9,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserSignUpRequest {
-    private String email;
+    private String loginId;
     private String password;
     private String name;
 
     public User toEntity() {
         return User.builder()
-                .email(this.email)
+                .loginId(this.loginId)
                 .password(this.password)
                 .name(this.name)
                 .build();

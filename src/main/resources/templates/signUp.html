@@ -10,9 +10,9 @@
 
   <form class="" onsubmit="return false;">
     <div class="label-input">
-      <label for="email">이메일</label>
-      <input style="margin-right: 20px" type="email" id="email" name="email" required>
-      <button id="check_email" style="width: 100px" onclick="Check_email(); return false;">중복확인</button>
+      <label for="loginId">아이디</label>
+      <input style="margin-right: 20px" type="loginId" id="loginId" name="loginId" required>
+      <button id="check_loginId" style="width: 100px" onclick="Check_loginId(); return false;">중복확인</button>
     </div><br>
 
     <div class="label-input">
@@ -37,19 +37,19 @@
 <script>
   const config = {"Content-Type" : `application/json` };
 
-  async function Check_email() {
-    let email = document.getElementById('email').value;
+  async function Check_loginId() {
+    let loginId = document.getElementById('loginId').value;
 
-    if (email == "") {
-      alert("이메일을 입력해주세요.")
+    if (loginId == "") {
+      alert("아이디를 입력해주세요.")
     } else {
       try {
-        const response = await axios.post('/api/v1/check/email', {"email": email}, config);
-        alert("사용 가능한 이메일입니다.")
+        const response = await axios.post('/api/v1/check/loginId', {"loginId": loginId}, config);
+        alert("사용 가능한 아이디입니다.")
         document.getElementById("signup").disabled = false
-        document.getElementById("email").disabled = true
+        document.getElementById("loginId").disabled = true
       } catch (e) {
-        alert("사용 불가능한 이메일입니다. 다시 한번 확인해주세요.")
+        alert("사용 불가능한 아이디입니다. 다시 한번 확인해주세요.")
         document.getElementById("signup").disabled = true
       }
     }
@@ -57,18 +57,18 @@
 
   //회원가입 요청
   async function Signup() {
-    let email = document.getElementById("email").value;
+    let loginId = document.getElementById("loginId").value;
     let password = document.getElementById("password").value;
     let name = document.getElementById("name").value;
 
     let data = {
-      'email' : email,
+      'loginId' : loginId,
       'password' : password,
       'name' : name
     }
 
-    if (email == "") {
-      alert("이메일을 입력해주세요.")
+    if (loginId == "") {
+      alert("아이디를 입력해주세요.")
     } else if (password == "") {
       alert("비밀번호를 입력해주세요.")
     } else if (name == "") {

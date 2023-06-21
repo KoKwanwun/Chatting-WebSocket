@@ -7,6 +7,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEmailRequest {
-    private String email;
+public class UserLoginIdRequest {
+    private String loginId;
 }

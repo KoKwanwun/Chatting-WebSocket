@@ -1,4 +1,4 @@
-package com.chatting.domain.dto;
+package com.chatting.domain.dto.user;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class UserDto {
     private Long id;
-    private String email;
+    private String loginId;
     private String password;
     private String name;
 }
