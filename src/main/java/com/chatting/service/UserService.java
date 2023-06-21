@@ -8,6 +8,7 @@ import com.chatting.execption.ErrorCode;
 import com.chatting.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +17,10 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SignUpService {
+public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encoder;
 
     @Transactional
     public UserDto signUp(UserSignUpRequest request) {
@@ -34,7 +36,7 @@ public class SignUpService {
         });
 
         //정상 회원 저장 로직
-        User user = request.toEntity();
+        User user = request.toEntity(encoder.encode(password));
         User savedUser = userRepository.save(user);
 
         return savedUser.toDto();

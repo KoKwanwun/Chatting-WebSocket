@@ -13,10 +13,10 @@ public class UserSignUpRequest {
     private String password;
     private String name;
 
-    public User toEntity() {
+    public User toEntity(String enCodedPassword) {
         return User.builder()
                 .loginId(this.loginId)
-                .password(this.password)
+                .password(enCodedPassword)
                 .name(this.name)
                 .build();
     }

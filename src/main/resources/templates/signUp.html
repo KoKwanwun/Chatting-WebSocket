@@ -44,7 +44,7 @@
       alert("아이디를 입력해주세요.")
     } else {
       try {
-        const response = await axios.post('/api/v1/check/loginId', {"loginId": loginId}, config);
+        const response = await axios.post('/api/v1/user/signup/check/loginId', {"loginId": loginId}, config);
         alert("사용 가능한 아이디입니다.")
         document.getElementById("signup").disabled = false
         document.getElementById("loginId").disabled = true
@@ -75,7 +75,7 @@
       alert("이름을 입력해주세요.")
     } else {
       try {
-        await axios.post('/api/v1/signup', data, config);
+        await axios.post('/api/v1/user/signup', data, config);
         alert('회원가입에 성공했습니다.')
         window.location.href = '/';
       } catch (e) {
