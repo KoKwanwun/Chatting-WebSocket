@@ -52,7 +52,7 @@ public class UserRestController {
         request.getSession().invalidate();
         HttpSession session = request.getSession(true);  // Session이 없으면 생성
 
-        // 세션에 loginId, name을 넣어줌
+        // 세션에 loginId을 넣어줌
         session.setAttribute("loginId", userLoginRequest.getLoginId());
         session.setMaxInactiveInterval(1800); // Session이 30분동안 유지
     }
