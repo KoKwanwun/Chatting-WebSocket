@@ -1,6 +1,7 @@
 package com.chatting.service;
 
 import com.chatting.domain.dto.user.UserDto;
+import com.chatting.domain.dto.user.UserLoginRequest;
 import com.chatting.domain.dto.user.UserSignUpRequest;
 import com.chatting.domain.entity.User;
 import com.chatting.execption.ApplicationException;
@@ -48,6 +49,21 @@ public class UserService {
             throw new ApplicationException(ErrorCode.DUPLICATED_EMAIL);
         } else {
             return true;
+        }
+    }
+
+    public void login(UserLoginRequest request) {
+        String loginId = request.getLoginId();
+        String password = request.getPassword();
+
+        // id가 DB에 존재하는지
+        User user = userRepository.findByLoginId(loginId).orElseThrow(() -> {
+            throw new ApplicationException(ErrorCode.USERId_NOT_FOUNDED);
+        });
+
+        //email-password 일치여부 확인
+        if (!encoder.matches(password, user.getPassword())) {
+            throw new ApplicationException(ErrorCode.INVALID_PASSWORD);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.chatting.controller.front;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,7 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping
-    public String main() {
+    public String main(HttpServletRequest request) {
+
+        String loginId = (String) request.getSession().getAttribute("loginId");
+
+        if (loginId == null) {
+            return "login";
+        }
+
         return "index";
     }
 
