@@ -19,7 +19,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/user/signup", "/api/v1/user/**", "/js/**", "/css/**").permitAll()
+                .requestMatchers("/**", "/user/signup", "/api/v1/user/**", "/js/**", "/css/**").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.formLogin().disable();

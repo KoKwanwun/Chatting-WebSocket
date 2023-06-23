@@ -31,13 +31,8 @@
     }
 
     // 친구추가 요청
-    async function addFriend() {
-        try {
-            await axios.post('/api/v1/friend/add');
-            window.location.href = '/';
-        } catch (e) {
-            alert("해당 아이디는 존재하지 않습니다.")
-        }
+    async function goAddFriend() {
+        window.location.href = '/friend/add';
     }
 
     function SignUp() {
@@ -52,7 +47,7 @@
     // 친구 버튼 클릭 시 이벤트 처리
     friendsButton.addEventListener('click', function() {
         chatContainer.innerHTML = '<h4 id=' + "menu-name" + '>친구</h4>'
-        + '<button onClick=' + "addFriend()" + '>친구추가</button>';
+        + '<button onClick=' + "goAddFriend()" + '>친구추가</button>';
 
         // 무한 스크롤 이벤트 처리
         loadFriends();

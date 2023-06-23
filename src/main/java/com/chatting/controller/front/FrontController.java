@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class FrontController {
 
     @GetMapping
     public String main(HttpServletRequest request) {
@@ -22,5 +22,10 @@ public class HomeController {
     @GetMapping("/user/signup")
     public String signUp() {
         return "signUp";
+    }
+
+    @GetMapping("/friend/add")
+    public String addFriend() {
+        return "addFriend";
     }
 }
