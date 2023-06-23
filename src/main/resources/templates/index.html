@@ -5,13 +5,17 @@
     <link rel="stylesheet" href="/css/styles.css"> <!-- CSS 파일 링크 -->
 </head>
 <body>
-<div class="container">
-    <h2>채팅방</h2>
+    <div class="container">
+        <h2>채팅방</h2>
 
-    <button onclick="LogOut()">로그아웃</button>
-</div>
+        <button onclick="LogOut()">로그아웃</button>
 
-<!-- JavaScript 파일 링크 등 필요한 리소스를 추가하세요 -->
+        <div class="button-container">
+            <div class="chat-button" id="friends-button">친구</div>
+            <div class="chat-button" id="chatrooms-button">채팅방</div>
+        </div>
+        <div id="chat-container"></div>
+    </div>
 
 <script src="/js/axios.js"></script>
 <script>
@@ -26,9 +30,67 @@
         }
     }
 
+    // 친구추가 요청
+    async function addFriend() {
+        try {
+            await axios.post('/api/v1/friend/add');
+            window.location.href = '/';
+        } catch (e) {
+            alert("해당 아이디는 존재하지 않습니다.")
+        }
+    }
+
     function SignUp() {
         window.location.href = "/user/signup";
     }
+</script>
+<script>
+    var chatContainer = document.getElementById('chat-container');
+    var friendsButton = document.getElementById('friends-button');
+    var chatroomsButton = document.getElementById('chatrooms-button');
+
+    // 친구 버튼 클릭 시 이벤트 처리
+    friendsButton.addEventListener('click', function() {
+        chatContainer.innerHTML = '<h4 id=' + "menu-name" + '>친구</h4>'
+        + '<button onClick=' + "addFriend()" + '>친구추가</button>';
+
+        // 무한 스크롤 이벤트 처리
+        loadFriends();
+
+        // 친구 목록을 가져와서 채팅방 내용을 업데이트하는 함수
+        function loadFriends() {
+            // 친구 목록을 가져오는 Ajax 요청 등의 비동기 작업 수행
+
+            // 가져온 친구 목록을 chatContainer에 추가
+            var friends = ['친구1', '친구2', '친구3'];
+            for (var i = 0; i < friends.length; i++) {
+                var friendElement = document.createElement('div');
+                friendElement.innerText = friends[i];
+                chatContainer.appendChild(friendElement);
+            }
+        }
+    });
+
+    // 채팅방 버튼 클릭 시 이벤트 처리
+    chatroomsButton.addEventListener('click', function() {
+        chatContainer.innerHTML = '<h4 id=' + "menu-name" + '>채팅방 목록</h4>';
+
+        // 무한 스크롤 이벤트 처리
+        loadChatrooms();
+
+        // 채팅방 목록을 가져와서 채팅방 내용을 업데이트하는 함수
+        function loadChatrooms() {
+            // 채팅방 목록을 가져오는 Ajax 요청 등의 비동기 작업 수행
+
+            // 가져온 채팅방 목록을 chatContainer에 추가
+            var chatrooms = ['채팅방1', '채팅방2', '채팅방3'];
+            for (var i = 0; i < chatrooms.length; i++) {
+                var chatroomElement = document.createElement('div');
+                chatroomElement.innerText = chatrooms[i];
+                chatContainer.appendChild(chatroomElement);
+            }
+        }
+    });
 </script>
 </body>
 </html>

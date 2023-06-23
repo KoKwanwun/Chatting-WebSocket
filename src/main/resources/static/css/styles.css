@@ -66,3 +66,24 @@ button {
     background-color: #4285F4;
     color: #fff;
 }
+
+#chat-container {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.button-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chat-button {
+    display: inline-block;
+    width: 100px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #4285C3;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
