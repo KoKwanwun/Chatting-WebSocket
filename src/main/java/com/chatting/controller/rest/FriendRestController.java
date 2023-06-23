@@ -2,6 +2,7 @@ package com.chatting.controller.rest;
 
 import com.chatting.domain.Response;
 import com.chatting.domain.dto.friend.FriendDto;
+import com.chatting.domain.dto.friend.FriendListResponse;
 import com.chatting.domain.dto.user.UserSignUpRequest;
 import com.chatting.service.FriendService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/friend")
@@ -28,5 +31,14 @@ public class FriendRestController {
         FriendDto friendDto = friendService.addFriend((String) request.getSession().getAttribute("loginId"), userSignUpRequest.getLoginId());
 
         return Response.success(friendDto);
+    }
+
+    //== 친구리스트 가져오기 요청 ==//
+    @PostMapping("/list")
+    public Response<List<FriendListResponse>> friendList(HttpServletRequest request) {
+
+        List<FriendListResponse> friendList = friendService.friendList((String) request.getSession().getAttribute("loginId"));
+
+        return Response.success(friendList);
     }
 }

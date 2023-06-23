@@ -1,6 +1,7 @@
 package com.chatting.service;
 
 import com.chatting.domain.dto.friend.FriendDto;
+import com.chatting.domain.dto.friend.FriendListResponse;
 import com.chatting.domain.entity.Friend;
 import com.chatting.domain.entity.User;
 import com.chatting.execption.ApplicationException;
@@ -11,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -49,5 +53,24 @@ public class FriendService {
                 .build());
 
         return savedFriend.toDto();
+    }
+
+    public List<FriendListResponse> friendList(String loginId) {
+
+        // 유저 id가 DB에 존재하는지
+        User user = userRepository.findByLoginId(loginId).orElseThrow(() -> {
+            throw new ApplicationException(ErrorCode.USERId_NOT_FOUNDED);
+        });
+
+        List<User> friendList = friendRepository.findByUser_id(user.getId()).stream()
+                .map(Friend::getFriend).collect(Collectors.toList());
+
+        List<FriendListResponse> friendListResponseList = new ArrayList<>();
+
+        for (User friend : friendList) {
+            friendListResponseList.add(new FriendListResponse(friend.getLoginId(), friend.getName()));
+        }
+
+        return friendListResponseList;
     }
 }

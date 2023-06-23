@@ -53,16 +53,19 @@
         loadFriends();
 
         // 친구 목록을 가져와서 채팅방 내용을 업데이트하는 함수
-        function loadFriends() {
+        async function loadFriends() {
             // 친구 목록을 가져오는 Ajax 요청 등의 비동기 작업 수행
 
             // 가져온 친구 목록을 chatContainer에 추가
-            var friends = ['친구1', '친구2', '친구3'];
+            let friends = await axios.post('/api/v1/friend/list');
+            friends = friends.data.result
+            console.log(friends)
+            var tableHTML = '<table>';
             for (var i = 0; i < friends.length; i++) {
-                var friendElement = document.createElement('div');
-                friendElement.innerText = friends[i];
-                chatContainer.appendChild(friendElement);
+                tableHTML += '<tr><td>' + friends[i].loginId + '</td><td>' + friends[i].name + '</td></tr>';
             }
+            tableHTML += '</table>';
+            chatContainer.innerHTML += tableHTML;
         }
     });
 
