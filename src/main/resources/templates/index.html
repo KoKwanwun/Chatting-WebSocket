@@ -12,7 +12,9 @@
 
         <div class="button-container">
             <div class="chat-button" id="friends-button">친구</div>
+            <div class="chat-button" id="friendAdd-button" onClick=goAddFriend()>친구추가</div>
             <div class="chat-button" id="chatrooms-button">채팅방</div>
+            <div class="chat-button" id="chatroomAdd-button">채팅방생성</div>
         </div>
         <div id="chat-container"></div>
     </div>
@@ -46,8 +48,7 @@
 
     // 친구 버튼 클릭 시 이벤트 처리
     friendsButton.addEventListener('click', function() {
-        chatContainer.innerHTML = '<h4 id=' + "menu-name" + '>친구</h4>'
-        + '<button onClick=' + "goAddFriend()" + '>친구추가</button>';
+        chatContainer.innerHTML = '<h4 id=' + "menu-name" + '>친구</h4>';
 
         // 무한 스크롤 이벤트 처리
         loadFriends();
