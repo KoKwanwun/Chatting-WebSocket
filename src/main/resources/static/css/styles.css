@@ -90,8 +90,15 @@ button {
 
 table {
     width: 100%;
+    border-collapse: collapse
 }
 
 td {
     width: 50%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+tr {
+    border-bottom: 1px solid black;
 }
